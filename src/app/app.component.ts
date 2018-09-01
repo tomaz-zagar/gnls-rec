@@ -1,4 +1,5 @@
 import { Component, ViewChild } from '@angular/core';
+import * as d3 from 'd3';
 
 @Component({
   selector: 'app-root',
@@ -11,7 +12,14 @@ export class AppComponent {
   @ViewChild('escherContainer') escherContainer;
 
   ngAfterViewInit() {
-    console.log('only after THIS EVENT "child" is usable!!');
+    //only after THIS EVENT "child" is usable!!
+    d3.json('./assets/e_coli_core.Core metabolism.json')
+      .then((data) => {
+        this.escherContainer.build(data);
+      })
+      .catch((err) => {
+        // Handle err
+      });
   }
 
   changeColor(e) {
