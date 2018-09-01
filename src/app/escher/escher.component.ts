@@ -18,7 +18,7 @@ export class EscherComponent implements OnInit {
   build(jsonData) {
     let options: Object = {
       menu: 'zoom',
-      fill_screen: true
+      fill_screen: false
     }
 
     Builder(jsonData, null, null, this.escherContainer.nativeElement, options);
