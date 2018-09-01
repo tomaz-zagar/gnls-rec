@@ -7,4 +7,14 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
   title = 'gnls-rec';
+
+  onFileSelected(file: File): void {
+    let stream = new FileReader();
+
+    stream.onload = (e: ProgressEvent) => {
+      console.log(stream.result);
+    }
+
+    stream.readAsText(file);
+  }
 }
