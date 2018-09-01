@@ -14,6 +14,13 @@ export class AppComponent {
     console.log('only after THIS EVENT "child" is usable!!');
   }
 
+  changeColor(e) {
+    let paths=document.querySelectorAll('.escher-svg path');
+    for (let i = 0; i < paths.length; i++) {
+      paths[i].style.stroke='#00ff00';
+    }
+	}
+
   onFileSelected(file: File): void {
     let stream = new FileReader();
 

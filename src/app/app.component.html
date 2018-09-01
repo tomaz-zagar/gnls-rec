@@ -1,4 +1,5 @@
 <div>
   <app-upload-button [acceptedFileTypes]="'.json'" (onChange)="onFileSelected($event)"></app-upload-button>
+  <button (click)="changeColor($event)">Change color</button>
   <app-escher #escherContainer></app-escher>
 </div>
