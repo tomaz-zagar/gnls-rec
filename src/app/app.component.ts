@@ -25,7 +25,8 @@ export class AppComponent {
   changeColor(e) {
     let paths=document.querySelectorAll('.escher-svg path');
     for (let i = 0; i < paths.length; i++) {
-      paths[i].style.stroke='#00ff00';
+      let svgElement = <SVGElement><Element>paths[i];
+      svgElement.style.stroke='#00ff00';
     }
 	}
 
