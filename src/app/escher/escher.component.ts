@@ -11,6 +11,9 @@ export class EscherComponent implements OnInit {
   @ViewChild('escherContainer') escherContainer;
 
   public svgPathColor:String='';
+  public escherBuilder;
+
+  public outputText="napis";
 
   constructor() { }
 
@@ -23,7 +26,13 @@ export class EscherComponent implements OnInit {
       fill_screen: false
     }
 
-    Builder(jsonData, null, null, this.escherContainer.nativeElement, options);
+    this.escherBuilder=Builder(jsonData, null, null, this.escherContainer.nativeElement, options);
+    var self=this;
+    this.escherBuilder.selection.selectAll('.segment')
+        .on('click', (data) => {
+          self.outputText=data.from_node_id+" => "+data.to_node_id;
+            console.log('onclick',data)
+        });
   }
 
 }
