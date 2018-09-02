@@ -3,7 +3,7 @@
   <button #colorToggler data-color="#00ff00" (click)="changeColor($event)">Toggle to {{escherContainer.svgPathColor==''?colorToggler.getAttribute('data-color'):'default'}}</button>
 </div>
 <div class="right-div">
-  
+  {{this.escherContainer.outputText}}
 </div><br><br>
 <div class="left-div">
   <app-statistics></app-statistics>
