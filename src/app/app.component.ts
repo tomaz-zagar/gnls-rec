@@ -10,6 +10,7 @@ export class AppComponent {
   title = 'gnls-rec';
 
   @ViewChild('escherContainer') escherContainer;
+  @ViewChild('colorToggler') colorToggler;
 
   ngAfterViewInit() {
     //only after THIS EVENT "child" is usable!!
@@ -24,10 +25,19 @@ export class AppComponent {
 
   changeColor(e) {
     let paths=document.querySelectorAll('.escher-svg path');
+    
+    let color='';
+    
+    if (this.escherContainer.svgPathColor=='') {
+      color=this.colorToggler.nativeElement.getAttribute('data-color');
+    } 
+
     for (let i = 0; i < paths.length; i++) {
       let svgElement = <SVGElement><Element>paths[i];
-      svgElement.style.stroke='#00ff00';
+      svgElement.style.stroke=color;
     }
+    
+    this.escherContainer.svgPathColor=color;
 	}
 
   onFileSelected(file: File): void {

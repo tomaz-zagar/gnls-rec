@@ -1,5 +1,5 @@
 <div>
   <app-upload-button [acceptedFileTypes]="'.json'" (onChange)="onFileSelected($event)"></app-upload-button>
-  <button (click)="changeColor($event)">Change color</button>
+  <button #colorToggler data-color="#00ff00" (click)="changeColor($event)">Toggle to {{escherContainer.svgPathColor==''?colorToggler.getAttribute('data-color'):'default'}}</button>
   <app-escher #escherContainer></app-escher>
 </div>

@@ -10,6 +10,8 @@ export class EscherComponent implements OnInit {
 
   @ViewChild('escherContainer') escherContainer;
 
+  public svgPathColor:String='';
+
   constructor() { }
 
   ngOnInit() {
