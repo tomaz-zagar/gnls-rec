@@ -6,3 +6,13 @@
     min-height: 100%;
   }
 
+  .left-div{
+    width: 23%;
+    float: left;
+  }
+
+  .right-div{
+    width: 75%;
+    float: left;
+  }
+
