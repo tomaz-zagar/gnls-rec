@@ -1,5 +1,6 @@
 import { Component, ViewChild } from '@angular/core';
 import * as d3 from 'd3';
+import { DataService } from "./data.service";
 
 @Component({
   selector: 'app-root',
@@ -12,11 +13,13 @@ export class AppComponent {
   @ViewChild('escherContainer') escherContainer;
   @ViewChild('colorToggler') colorToggler;
 
+  constructor(private dataService: DataService) {}
+
   ngAfterViewInit() {
     //only after THIS EVENT "child" is usable!!
     d3.json('./assets/e_coli_core.Core metabolism.json')
       .then((data) => {
-        this.escherContainer.build(data);
+        this.dataService.data=data;
       })
       .catch((err) => {
         // Handle err
@@ -44,7 +47,7 @@ export class AppComponent {
     let stream = new FileReader();
 
     stream.onload = (e: ProgressEvent) => {
-      this.escherContainer.build(JSON.parse(stream.result));
+      this.dataService.data=JSON.parse(stream.result);
     }
 
     stream.readAsText(file);
