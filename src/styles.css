@@ -9,10 +9,16 @@
   .left-div{
     width: 23%;
     float: left;
+    display: block;
   }
 
   .right-div{
     width: 75%;
     float: left;
+    display: block;
+  }
+
+  .clear {
+    clear: both;
   }
 
