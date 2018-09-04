@@ -1,4 +1,5 @@
 export interface State {
-    jsonData: null,
-    color: ''
+    file: File,
+    jsonData: any,
+    color: string
 }

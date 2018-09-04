@@ -1,14 +1,20 @@
 import { Action } from '@ngrx/store';
 
-export const UPLOAD_FILE  = '[Store] Upload';
-export const CHANGE_COLOR  = '[Store] ChangeColor';
-export const ESCHER_PATH_CLICK  = '[Store] EscherPathClick';
+export const FILE_SELECTED  = '[State] FileSelected';
+export const CHANGE_COLOR  = '[State] ChangeColor';
+export const ESCHER_PATH_CLICK  = '[State] EscherPathClick';
+export const DATA_UPLOADED  = '[State] DataUploaded';
 
-export class UploadFile implements Action {
-  readonly type = UPLOAD_FILE;
+export class FileSelected implements Action {
+  readonly type = FILE_SELECTED;
 
   /// uses a constructor to send a payload with the action
-  constructor(public payload: string) {}
+  constructor(public payload: File) {}
+}
+
+export class DataUploaded implements Action {
+    readonly type = DATA_UPLOADED;
+    constructor(public payload: any) {}
 }
 
 export class ChangeColor implements Action {
@@ -19,5 +25,5 @@ export class EscherPathClick implements Action {
     readonly type = ESCHER_PATH_CLICK;
 }
 
-export type StateActionTypes = UploadFile | ChangeColor
+export type StateActionTypes = FileSelected | ChangeColor | EscherPathClick | DataUploaded
   

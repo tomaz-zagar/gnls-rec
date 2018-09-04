@@ -5,6 +5,7 @@ export type Action = StateActions.StateActionTypes;
 
 /// Default app state
 const defaultState: State = {
+    file: null,
     jsonData: null,
     color: ''
 }
@@ -19,8 +20,10 @@ export function stateReducer(state: State = defaultState, action: Action) {
     
     switch (action.type) {
 
-    case StateActions.UPLOAD_FILE:
-        return newState(state, { text: action.payload });
+    case StateActions.FILE_SELECTED:
+        return newState(state, { file: action.payload });
+    case StateActions.DATA_UPLOADED:
+        return newState(state, { jsonData: action.payload });
 	default:
 		return state;
 	}

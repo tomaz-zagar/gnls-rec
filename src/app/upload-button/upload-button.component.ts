@@ -1,4 +1,8 @@
-import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
+
+import { Store } from '@ngrx/store';
+import { AppState } from './../app.state';
+import * as StateActions from '../store/actions/state.actions';
 
 @Component({
   selector: 'app-upload-button',
@@ -8,9 +12,8 @@ import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 export class UploadButtonComponent implements OnInit {
 
   @Input() acceptedFileTypes: string;
-  @Output() onChange = new EventEmitter<File>();
 
-  constructor() { 
+  constructor(private state: Store<AppState>) { 
     this.acceptedFileTypes = '*';
   }
 
@@ -18,7 +21,7 @@ export class UploadButtonComponent implements OnInit {
     let fileList: FileList = event.target.files;
     if (fileList.length > 0){
       let file: File = fileList[0];
-      this.onChange.emit(file);
+      this.state.dispatch(new StateActions.FileSelected(file));
     }
   }
 
