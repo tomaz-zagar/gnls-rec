@@ -21,9 +21,5 @@ export class ChangeColor implements Action {
     readonly type = CHANGE_COLOR;
 }
 
-export class EscherPathClick implements Action {
-    readonly type = ESCHER_PATH_CLICK;
-}
-
-export type StateActionTypes = FileSelected | ChangeColor | EscherPathClick | DataUploaded
+export type StateActionTypes = FileSelected | ChangeColor | DataUploaded
   

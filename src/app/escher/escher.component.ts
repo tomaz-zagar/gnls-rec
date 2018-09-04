@@ -15,6 +15,8 @@ export class EscherComponent implements OnInit {
 
   state$: Observable<State>;
 
+  data:any;
+
   @ViewChild('escherContainer') escherContainer;
 
   public svgPathColor:String='';
@@ -27,7 +29,16 @@ export class EscherComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.state$.subscribe(store => this.build(store.jsonData))
+    /* https://stackoverflow.com/questions/37607257/rxjs-get-value-from-observable
+      To get data from an observable, you need to subscribe:
+      this.singleEvents$.subscribe(event => this.event = event);
+      In the template you can directly bind to observables using the | async pipe:
+      {{singleEvents$ | async}}
+    */
+    this.state$.subscribe(store => {
+      this.data=store.jsonData;
+      this.build(store.jsonData);
+    });
   }
 
   private build(jsonData) {
@@ -42,8 +53,7 @@ export class EscherComponent implements OnInit {
 
     this.escherBuilder.selection.selectAll('.segment')
         .on('click', (data) => {
-          /*
-          const nodes=this.dataService.data[1].nodes;
+          const nodes=this.data[1].nodes;
 
           const formatName=(node_id)=>{
             let name=nodes[node_id].name;
@@ -51,7 +61,6 @@ export class EscherComponent implements OnInit {
           }
 
           this.outputText= formatName(data.from_node_id) +" => "+ formatName(data.to_node_id);
-          */
         });
   }
 
