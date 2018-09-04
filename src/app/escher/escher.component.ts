@@ -1,6 +1,10 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { Builder } from 'escher-vis';
-import { DataService } from "../data.service";
+
+import { Observable } from 'rxjs';
+import { Store } from '@ngrx/store';
+import { State } from '../store/models/state.model';
+import { AppState } from './../app.state';
 
 @Component({
   selector: 'app-escher',
@@ -9,6 +13,8 @@ import { DataService } from "../data.service";
 })
 export class EscherComponent implements OnInit {
 
+  state$: Observable<State>;
+
   @ViewChild('escherContainer') escherContainer;
 
   public svgPathColor:String='';
@@ -16,13 +22,16 @@ export class EscherComponent implements OnInit {
 
   public outputText="Select a segment ...";
 
-  constructor(private dataService: DataService) { }
+  constructor(private state:Store<AppState>) { 
+    this.state$ = state.select('state');
+  }
 
   ngOnInit() {
-    this.dataService.subject.subscribe(jsonData => this.build(jsonData))
+    this.state$.subscribe(store => this.build(store.jsonData))
   }
 
   private build(jsonData) {
+    console.log('build',jsonData);
     if (jsonData===null) return;
     let options: Object = {
       menu: 'zoom',
@@ -33,6 +42,7 @@ export class EscherComponent implements OnInit {
 
     this.escherBuilder.selection.selectAll('.segment')
         .on('click', (data) => {
+          /*
           const nodes=this.dataService.data[1].nodes;
 
           const formatName=(node_id)=>{
@@ -41,6 +51,7 @@ export class EscherComponent implements OnInit {
           }
 
           this.outputText= formatName(data.from_node_id) +" => "+ formatName(data.to_node_id);
+          */
         });
   }
 
