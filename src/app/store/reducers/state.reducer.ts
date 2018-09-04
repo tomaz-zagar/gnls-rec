@@ -26,7 +26,7 @@ export function stateReducer(state: State = defaultState, action: Action) {
     case StateActions.DATA_UPLOADED:
         return newState(state, { jsonData: action.payload, build: true });
     case StateActions.CHANGE_COLOR:
-        return newState(state, { build: false });
+        return newState(state, { color: action.payload==state.color?defaultState.color:action.payload, build: false });
 	default:
 		return state;
 	}

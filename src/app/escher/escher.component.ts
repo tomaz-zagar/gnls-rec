@@ -15,11 +15,10 @@ export class EscherComponent implements OnInit {
 
   state$: Observable<State>;
 
-  data:any;
+  private store:any;
 
   @ViewChild('escherContainer') escherContainer;
 
-  public svgPathColor:String='';
   public escherBuilder;
 
   public outputText="Select a segment ...";
@@ -36,13 +35,19 @@ export class EscherComponent implements OnInit {
       {{singleEvents$ | async}}
     */
     this.state$.subscribe(store => {
-      this.data=store.jsonData;
-      this.build(store.jsonData);
+      this.store=store;
+      if (store.build) {
+        this.build();
+      }
+      else{
+        this.changeColor();
+      }
+      
     });
   }
 
-  private build(jsonData) {
-    console.log('build',jsonData);
+  private build() {
+    let jsonData=this.store.jsonData;
     if (jsonData===null) return;
     let options: Object = {
       menu: 'zoom',
@@ -53,7 +58,7 @@ export class EscherComponent implements OnInit {
 
     this.escherBuilder.selection.selectAll('.segment')
         .on('click', (data) => {
-          const nodes=this.data[1].nodes;
+          const nodes=this.store.jsonData[1].nodes;
 
           const formatName=(node_id)=>{
             let name=nodes[node_id].name;
@@ -63,5 +68,17 @@ export class EscherComponent implements OnInit {
           this.outputText= formatName(data.from_node_id) +" => "+ formatName(data.to_node_id);
         });
   }
+
+  private changeColor() {
+    let color=this.store.color;
+    if (color=='default') color='';
+
+    let paths=document.querySelectorAll('.escher-svg path');
+    
+    for (let i = 0; i < paths.length; i++) {
+      let svgElement = <SVGElement><Element>paths[i];
+      svgElement.style.stroke=color;
+    }
+	}
 
 }

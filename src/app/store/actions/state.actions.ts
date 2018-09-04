@@ -18,6 +18,7 @@ export class DataUploaded implements Action {
 
 export class ChangeColor implements Action {
     readonly type = CHANGE_COLOR;
+    constructor(public payload: string) {}
 }
 
 export type StateActionTypes = FileSelected | ChangeColor | DataUploaded

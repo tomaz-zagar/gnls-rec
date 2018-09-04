@@ -3,6 +3,8 @@ import * as d3 from 'd3';
 
 import { Store } from '@ngrx/store';
 import { AppState } from './app.state';
+import { Observable } from 'rxjs';
+import { State } from './store/models/state.model';
 import * as StateActions from './store/actions/state.actions';
 
 @Component({
@@ -13,10 +15,13 @@ import * as StateActions from './store/actions/state.actions';
 export class AppComponent {
   title = 'gnls-rec';
 
-  @ViewChild('escherContainer') escherContainer;
   @ViewChild('colorToggler') colorToggler;
 
-  constructor(private state: Store<AppState>) {}
+  state$: Observable<State>
+
+  constructor(private state: Store<AppState>) {
+    this.state$ = state.select('state');
+  }
 
   ngAfterViewInit() {
     //only after THIS EVENT "child" is usable!!
@@ -30,20 +35,7 @@ export class AppComponent {
   }
 
   changeColor(e) {
-    let paths=document.querySelectorAll('.escher-svg path');
-    
-    let color='';
-    
-    if (this.escherContainer.svgPathColor=='') {
-      color=this.colorToggler.nativeElement.getAttribute('data-color');
-    } 
-
-    for (let i = 0; i < paths.length; i++) {
-      let svgElement = <SVGElement><Element>paths[i];
-      svgElement.style.stroke=color;
-    }
-    
-    this.escherContainer.svgPathColor=color;
+    this.state.dispatch(new StateActions.ChangeColor(this.colorToggler.nativeElement.getAttribute('data-color')));
 	}
 
   onFileSelected(file: File): void {
