@@ -7,7 +7,8 @@ export type Action = StateActions.StateActionTypes;
 const defaultState: State = {
     file: null,
     jsonData: null,
-    color: ''
+    build: false,
+    color: 'default'
 }
 
 /// Helper function to create new state object
@@ -23,7 +24,9 @@ export function stateReducer(state: State = defaultState, action: Action) {
     case StateActions.FILE_SELECTED:
         return newState(state, { file: action.payload });
     case StateActions.DATA_UPLOADED:
-        return newState(state, { jsonData: action.payload });
+        return newState(state, { jsonData: action.payload, build: true });
+    case StateActions.CHANGE_COLOR:
+        return newState(state, { build: false });
 	default:
 		return state;
 	}

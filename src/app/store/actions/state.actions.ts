@@ -2,7 +2,6 @@ import { Action } from '@ngrx/store';
 
 export const FILE_SELECTED  = '[State] FileSelected';
 export const CHANGE_COLOR  = '[State] ChangeColor';
-export const ESCHER_PATH_CLICK  = '[State] EscherPathClick';
 export const DATA_UPLOADED  = '[State] DataUploaded';
 
 export class FileSelected implements Action {
