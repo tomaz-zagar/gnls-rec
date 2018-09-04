@@ -1,6 +1,10 @@
 import { Component, OnInit } from '@angular/core';
-import { DataService } from "../data.service";
 import * as utils from "../utils";
+
+import { Observable } from 'rxjs';
+import { Store } from '@ngrx/store';
+import { State } from '../store/models/state.model';
+import { AppState } from './../app.state';
 
 @Component({
   selector: 'app-statistics',
@@ -8,11 +12,14 @@ import * as utils from "../utils";
   styleUrls: ['./statistics.component.css']
 })
 export class StatisticsComponent implements OnInit {
+  state$: Observable<State>;
 
-  constructor(private dataService: DataService) { }
+  constructor(private state:Store<AppState>) { 
+    this.state$ = state.select('state');
+  }
 
   ngOnInit() {
-    this.dataService.subject.subscribe(jsonData => this.statistics(jsonData))
+    this.state$.subscribe(store => this.statistics(store.jsonData))
   }
 
   nodesByType:any;
