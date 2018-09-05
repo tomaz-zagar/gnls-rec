@@ -10,13 +10,15 @@ import { AppComponent } from './app.component';
 import { UploadButtonComponent } from './upload-button/upload-button.component';
 import { EscherComponent } from './escher/escher.component';
 import { StatisticsComponent } from './statistics/statistics.component';
+import { ColorTogglerComponent } from './color-toggler/color-toggler.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     UploadButtonComponent,
     EscherComponent,
-    StatisticsComponent
+    StatisticsComponent,
+    ColorTogglerComponent
   ],
   imports: [
     BrowserModule,

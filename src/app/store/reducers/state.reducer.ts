@@ -21,7 +21,7 @@ export function stateReducer(state: State = defaultState, action: Action) {
     switch (action.type) {
 
     case StateActions.DATA_UPLOADED:
-        return newState(state, {clickedPathText:defaultState.clickedPathText, jsonData: action.payload });
+        return newState(state, {color:defaultState.color, clickedPathText:defaultState.clickedPathText, jsonData: action.payload });
     case StateActions.PATH_CLICKED:
         return newState(state, { clickedPathText: action.payload });
     case StateActions.CHANGE_COLOR:
