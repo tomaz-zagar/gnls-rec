@@ -1,15 +1,7 @@
 import { Action } from '@ngrx/store';
 
-export const FILE_SELECTED  = '[State] FileSelected';
 export const CHANGE_COLOR  = '[State] ChangeColor';
 export const DATA_UPLOADED  = '[State] DataUploaded';
-
-export class FileSelected implements Action {
-  readonly type = FILE_SELECTED;
-
-  /// uses a constructor to send a payload with the action
-  constructor(public payload: File) {}
-}
 
 export class DataUploaded implements Action {
     readonly type = DATA_UPLOADED;
@@ -21,5 +13,5 @@ export class ChangeColor implements Action {
     constructor(public payload: string) {}
 }
 
-export type StateActionTypes = FileSelected | ChangeColor | DataUploaded
+export type StateActionTypes = ChangeColor | DataUploaded
   
