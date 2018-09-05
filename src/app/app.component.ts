@@ -1,4 +1,4 @@
-import { Component, ViewChild } from '@angular/core';
+import { Component, ViewChild, ElementRef } from '@angular/core';
 import * as d3 from 'd3';
 
 import { Store } from '@ngrx/store';
@@ -15,7 +15,8 @@ import * as StateActions from './store/actions/state.actions';
 export class AppComponent {
   title = 'gnls-rec';
 
-  @ViewChild('colorToggler') colorToggler;
+  //https://stackoverflow.com/questions/39908967/how-to-get-reference-of-the-component-associated-with-elementref-in-angular-2
+  @ViewChild('colorToggler', {read: ElementRef}) colorToggler: ElementRef;
 
   state$: Observable<State>
 

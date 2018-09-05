@@ -1,6 +1,8 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 
+import {MatButtonModule} from '@angular/material';
+
 import { StoreModule } from '@ngrx/store';
 import { stateReducer } from './store/reducers/state.reducer';
 
@@ -18,6 +20,7 @@ import { StatisticsComponent } from './statistics/statistics.component';
   ],
   imports: [
     BrowserModule,
+    MatButtonModule,
     StoreModule.forRoot({
       state: stateReducer
     })
