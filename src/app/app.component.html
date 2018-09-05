@@ -3,6 +3,9 @@
     <app-upload-button [acceptedFileTypes]="'.json'" (change)="onFileSelected($event)"></app-upload-button>
     <button #colorToggler data-color="#00ff00" (click)="changeColor($event)">Toggle to {{(state$ | async).color=='default'?colorToggler.getAttribute('data-color'):'default'}}</button>
   </div>
+  <div class="right-div">
+    {{this.escherContainer.outputText}}
+  </div>
   <div class="clear"></div>
 </div>
 <div>
