@@ -50,6 +50,7 @@ export class EscherComponent implements OnInit {
   private build() {
     let jsonData=this.store.jsonData;
     if (jsonData===null) return;
+    console.log(jsonData)
     let options: Object = {
       menu: 'zoom',
       fill_screen: false

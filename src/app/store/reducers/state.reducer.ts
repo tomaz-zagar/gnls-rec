@@ -6,6 +6,7 @@ export type Action = StateActions.StateActionTypes;
 /// Default app state
 const defaultState: State = {
     jsonData: null,
+    pathName:'',
     color: 'default',
     clickedPathText:"Select a segment ..."
 }
@@ -21,7 +22,10 @@ export function stateReducer(state: State = defaultState, action: Action) {
     switch (action.type) {
 
     case StateActions.DATA_UPLOADED:
-        return newState(state, {color:defaultState.color, clickedPathText:defaultState.clickedPathText, jsonData: action.payload });
+        let pathName='';
+        if (action.payload && action.payload[0]) pathName=action.payload[0].map_name;
+
+        return newState(state, {pathName: pathName, color:defaultState.color, clickedPathText:defaultState.clickedPathText, jsonData: action.payload });
     case StateActions.PATH_CLICKED:
         return newState(state, { clickedPathText: action.payload });
     case StateActions.CHANGE_COLOR:

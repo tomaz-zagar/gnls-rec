@@ -1,7 +1,10 @@
 <div>
   <div class="left-div">
-    <app-upload-button [acceptedFileTypes]="'.json'" (change)="onFileSelected($event)"></app-upload-button><br><br>
-    <app-color-toggler #colorToggler [colorToToggle]="'#00ff00'" (click)="onChangeColor()"></app-color-toggler>
+    <app-upload-button [acceptedFileTypes]="'.json'" (change)="onFileSelected($event)"></app-upload-button><br>
+    <div class="escher-button">
+      <mat-card style="font-size: 0.9em"><span style="font-size:0.7em"><b>MAP NAME</b></span><br>{{(state$ | async).pathName}}</mat-card><br>
+    </div>
+    <app-color-toggler #colorToggler [colorToToggle]="'#00ff00'" (click)="onChangeColor()"></app-color-toggler><br>
   </div>
   <div class="right-div">
     {{(state$ | async).clickedPathText}}
