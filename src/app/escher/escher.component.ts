@@ -2,7 +2,7 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import { Builder } from 'escher-vis';
 
 import { Observable } from 'rxjs';
-import { Store } from '@ngrx/store';
+import { Store, ActionsSubject } from '@ngrx/store';
 import { State } from '../store/models/state.model';
 import { AppState } from './../app.state';
 
@@ -23,7 +23,7 @@ export class EscherComponent implements OnInit {
 
   public escherBuilder;
 
-  constructor(private state:Store<AppState>) { 
+  constructor(private state:Store<AppState>, private dispatcher: ActionsSubject) { 
     this.state$ = state.select('state');
   }
 
@@ -34,15 +34,16 @@ export class EscherComponent implements OnInit {
       In the template you can directly bind to observables using the | async pipe:
       {{singleEvents$ | async}}
     */
-    this.state$.subscribe(store => {
-      this.store=store;
-      if (store.build) {
-        this.build();
-      }
-      else{
+    this.state$.subscribe(store => this.store=store);
+
+    //https://stackoverflow.com/questions/43226681/how-to-subscribe-to-action-success-callback-using-ngrx-and-effects
+    this.dispatcher.subscribe(data => { 
+      if(data.type === StateActions.CHANGE_COLOR) {
         this.changeColor();
       }
-      
+      else if (data.type === StateActions.DATA_UPLOADED){
+        this.build();
+      }
     });
   }
 
