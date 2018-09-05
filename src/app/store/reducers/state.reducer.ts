@@ -7,7 +7,8 @@ export type Action = StateActions.StateActionTypes;
 const defaultState: State = {
     jsonData: null,
     build: false,
-    color: 'default'
+    color: 'default',
+    clickedPathText:"Select a segment ..."
 }
 
 /// Helper function to create new state object
@@ -21,7 +22,9 @@ export function stateReducer(state: State = defaultState, action: Action) {
     switch (action.type) {
 
     case StateActions.DATA_UPLOADED:
-        return newState(state, { jsonData: action.payload, build: true });
+        return newState(state, {clickedPathText:defaultState.clickedPathText, jsonData: action.payload, build: true });
+    case StateActions.PATH_CLICKED:
+        return newState(state, { clickedPathText: action.payload, build: false });
     case StateActions.CHANGE_COLOR:
         return newState(state, { color: action.payload==state.color?defaultState.color:action.payload, build: false });
 	default:

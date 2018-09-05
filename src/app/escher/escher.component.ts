@@ -6,6 +6,8 @@ import { Store } from '@ngrx/store';
 import { State } from '../store/models/state.model';
 import { AppState } from './../app.state';
 
+import * as StateActions from '../store/actions/state.actions';
+
 @Component({
   selector: 'app-escher',
   templateUrl: './escher.component.html',
@@ -20,8 +22,6 @@ export class EscherComponent implements OnInit {
   @ViewChild('escherContainer') escherContainer;
 
   public escherBuilder;
-
-  public outputText="Select a segment ...";
 
   constructor(private state:Store<AppState>) { 
     this.state$ = state.select('state');
@@ -65,7 +65,7 @@ export class EscherComponent implements OnInit {
             return name?(name + " (nodeID: "+node_id+")"):"nodeID: "+node_id;
           }
 
-          this.outputText= formatName(data.from_node_id) +" => "+ formatName(data.to_node_id);
+          this.state.dispatch(new StateActions.PathClicked(formatName(data.from_node_id) +" => "+ formatName(data.to_node_id)));
         });
   }
 
