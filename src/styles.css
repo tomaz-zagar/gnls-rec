@@ -22,3 +22,8 @@
     clear: both;
   }
 
+  svg.escher-svg .segment:hover {
+    stroke: yellow;
+    cursor: pointer;
+  }
+
