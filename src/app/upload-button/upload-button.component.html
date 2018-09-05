@@ -1,1 +1,5 @@
-<input type="file" [accept]="acceptedFileTypes"  placeholder="Browse >>">
+<button class="escher-button" color="primary" mat-raised-button (click)="fileInput.click()">
+    <mat-icon>library_add</mat-icon>
+    <span> Load a pathway</span>
+    <input #fileInput type="file" [accept]="acceptedFileTypes" style="display:none;">
+</button>

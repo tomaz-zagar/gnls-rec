@@ -1,7 +1,7 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 
-import {MatButtonModule} from '@angular/material';
+import {MatButtonModule, MatIconModule} from '@angular/material';
 
 import { StoreModule } from '@ngrx/store';
 import { stateReducer } from './store/reducers/state.reducer';
@@ -23,6 +23,7 @@ import { ColorTogglerComponent } from './color-toggler/color-toggler.component';
   imports: [
     BrowserModule,
     MatButtonModule,
+    MatIconModule,
     StoreModule.forRoot({
       state: stateReducer
     })
