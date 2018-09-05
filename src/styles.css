@@ -5,6 +5,7 @@
   body {
     height: 100%;
     min-height: 100%;
+    font-family: Roboto, Arial, sans-serif;
   }
 
   .left-div{
@@ -29,6 +30,10 @@
   }
 
   .escher-button{
-    width:80%;
+    width:93%;
+  }
+
+  .escher-button pre{
+    font-size: 0.8em;
   }
 
