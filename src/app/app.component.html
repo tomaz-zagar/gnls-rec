@@ -1,5 +1,5 @@
 <div class="left-div">
-  <app-upload-button [acceptedFileTypes]="'.json'" (onChange)="onFileSelected($event)"></app-upload-button>
+  <app-upload-button [acceptedFileTypes]="'.json'" (change)="onFileSelected($event)"></app-upload-button>
   <button #colorToggler data-color="#00ff00" (click)="changeColor($event)">Toggle to {{(state$ | async).color=='default'?colorToggler.getAttribute('data-color'):'default'}}</button>
 </div>
 <div class="right-div">

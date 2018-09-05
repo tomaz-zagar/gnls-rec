@@ -38,13 +38,17 @@ export class AppComponent {
     this.state.dispatch(new StateActions.ChangeColor(this.colorToggler.nativeElement.getAttribute('data-color')));
 	}
 
-  onFileSelected(file: File): void {
-    let stream = new FileReader();
+  onFileSelected(event): void {
+    let fileList: FileList = event.target.files;
+    if (fileList.length > 0){
+      let file: File = fileList[0];
+      let stream = new FileReader();
 
-    stream.onload = (e: ProgressEvent) => {
-      this.state.dispatch(new StateActions.DataUploaded(JSON.parse(stream.result)));
+      stream.onload = (e: ProgressEvent) => {
+        this.state.dispatch(new StateActions.DataUploaded(JSON.parse(stream.result)));
+      }
+
+      stream.readAsText(file);  
     }
-
-    stream.readAsText(file);
   }
 }
